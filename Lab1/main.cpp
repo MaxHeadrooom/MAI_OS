@@ -14,9 +14,10 @@ char *read_string(size_t &string_len)
     string_len = 0;
     size_t string_cap = 1;
     char *string = new char[string_cap];
-    char c = cin.get();
+    char c;
+    read(STDIN_FILENO, &c, sizeof(char));
     if (c == '\n')
-        c = cin.get();
+        read(STDIN_FILENO, &c, sizeof(char));
     if (c == EOF)
         return nullptr;
     while (c != '\n')
@@ -34,7 +35,7 @@ char *read_string(size_t &string_len)
             delete[] string;
             string = new_string;
         }
-        c = std::cin.get();
+        read(STDIN_FILENO, &c, sizeof(char));
         if (c == EOF)
             return nullptr;
     }
